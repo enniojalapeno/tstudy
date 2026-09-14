@@ -1,13 +1,17 @@
-# tstudy
+<h1 align="center">tstudy</h1>
 
-Exam accountability dashboard. One screen: live timer, recall-forced log, mastery board.
+<p align="center">
+  Exam accountability for the terminal.<br/>
+  Start a timer, prove you remember, watch mastery grow.
+</p>
 
-```
-plan (cue) → start (tiny 2-min default) → focus → stop (recall 1-4 + 1 line) → stats (mastery)
-```
+<p align="center">
+  <a href="https://github.com/enniojalapeno/tstudy/blob/main/LICENSE"><img src="https://img.shields.io/github/license/enniojalapeno/tstudy?style=flat-square" alt="License" /></a>
+  <img src="https://img.shields.io/badge/python-3.11+-blue?style=flat-square" alt="Python" />
+  <img src="https://img.shields.io/badge/terminal-macOS%20%2F%20Linux-lightgrey?style=flat-square" alt="Platform" />
+</p>
 
-Science: Fogg `B = M × A × T` (tiny start + clear cue), SDT competence
-(levels/recall, not shame), retrieval practice (no log without a recall note).
+---
 
 ## Install
 
@@ -16,20 +20,32 @@ pip install -r requirements.txt
 ln -sf "$PWD/tstudy.py" ~/.local/bin/tstudy   # ensure ~/.local/bin is on PATH
 ```
 
-## Use
+## How it works
 
-| Type | What happens |
-|---|---|
-| `tstudy` | Dashboard: Start → live `00:03 / 25:00` timer → Stop → pick recall 1-4 + note → Log. Keys: `s` start/stop, `t` theme, `d` delete, `q` quit. Click out of text fields first or letters type instead. |
-| `tstudy chem 25` | Quick start without the dashboard. Omit mins → last plan, omit all → 2min general. |
-| `tstudy stop` | Stop + log (prompts recall + note). |
-| `tstudy stats` | Mastery table in plain text. |
-| `tstudy delete [N] [--yes]` | Numbered list, pick what goes (blank=cancel). Dashboard: cursor the RECENT row, `d` twice. |
-| `tstudy theme [name]` | Lists 21 themes + current; with name sets it (saved to `~/.study/config.json`). Dashboard `t` cycles. |
-| `tstudy plan chem 25` | Save cue so the dashboard pre-fills subject/mins. |
+- **Start**: `tstudy` opens the dashboard — subject, minutes, goal → `▶ Start`
+- **Focus**: live `00:03 / 25:00` timer with a progress bar
+- **Log**: `■ Stop` → pick recall 1–4 → one line of what you remember → `✓ Log`
+- **Proof**: logging *requires* recall + note — timer alone doesn't count
+- **Delete**: cursor a RECENT row, press `d` twice (or `tstudy delete [N]`)
+- **Keys**: `s` start/stop, `t` theme, `d` delete, `q` quit
 
-## Data
+Quick paths without the dashboard: `tstudy chem 25`, `tstudy stop`, `tstudy stats`, `tstudy plan chem 25`.
 
-`~/.study/` — `plans.json`, `active.json`, `sessions.jsonl`, `config.json`.
-Override for tests: `STUDY_HOME=/tmp/x tstudy stats`.
-One session at a time. Logging requires recall 1-4 + note.
+## Settings
+
+- **Theme**: 21 builtins — `dracula`, `nord`, `gruvbox`, `catppuccin-mocha`, `tokyo-night`… (`tstudy theme [name]`, saved to `~/.study/config.json`)
+- **Data**: `~/.study/` — `plans.json`, `active.json`, `sessions.jsonl`, `config.json`
+- **Cue**: `tstudy plan chem 25` pre-fills the dashboard's subject/minutes
+
+## Dev
+
+```sh
+git clone https://github.com/enniojalapeno/tstudy.git
+cd tstudy
+pip install -r requirements.txt
+python tstudy.py
+```
+
+## License
+
+[MIT](LICENSE)
